@@ -32,14 +32,14 @@ flowchart LR
 
 ## Services
 
-| Service | Rôle | Statut |
-| --- | --- | --- |
-| `core-banking-service` | Propriétaire du solde : réservation, exécution ou libération des fonds | 🚧 En cours |
-| `fraud-detection-service` | Verdict de fraude en streaming (Kafka Streams) | ⏳ Phase 3 |
-| `ledger-service` | Grand livre comptable en partie double | ⏳ Phase 3 |
-| `query-service` | Vue de lecture (CQRS) | ⏳ Phase 4 |
-| `notification-service` | Notifications client | ⏳ Phase 4 |
-| `api-gateway` | Authentification, routage | ⏳ Phase 6 |
+| Service           | Rôle                                                                   | Statut      |
+| ----------------- | ---------------------------------------------------------------------- | ----------- |
+| `corebanking`     | Propriétaire du solde : réservation, exécution ou libération des fonds | 🚧 En cours |
+| `fraud-detection` | Verdict de fraude en streaming (Kafka Streams)                         | ⏳ Phase 3  |
+| `ledger`          | Grand livre comptable en partie double                                 | ⏳ Phase 3  |
+| `query`           | Vue de lecture (CQRS)                                                  | ⏳ Phase 4  |
+| `notification`    | Notifications client                                                   | ⏳ Phase 4  |
+| `gateway`         | Authentification, routage                                              | ⏳ Phase 6  |
 
 ## Stack
 
