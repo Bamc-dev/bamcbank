@@ -60,7 +60,7 @@ Java 21 · Spring Boot 4 · Maven · Kafka (KRaft) + Schema Registry (Avro) · D
 Prérequis : Java 21.
 
 ```bash
-cd core-banking-service
+cd corebanking
 ./mvnw test          # Linux / macOS
 mvnw.cmd test        # Windows
 ```
