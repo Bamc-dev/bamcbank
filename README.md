@@ -74,4 +74,4 @@ mvnw.cmd test        # Windows
 
 ## Outillage IA
 
-Le développement est assisté par Cursor : les règles du projet sont versionnées dans `.cursor/rules` (le domaine n'importe jamais de framework, TDD obligatoire…), et chaque PR est relue par Cursor Bugbot avant la relecture humaine. Les agents proposent des PR, ils ne mergent jamais seuls.
+Le développement est assisté par Claude : les règles du projet sont versionnées dans `CLAUDE.md` (le domaine n'importe jamais de framework, TDD obligatoire…). L'IA propose, je décide : ses modifications passent par des PR, avec relecture humaine et CI verte avant tout merge, et elle ne merge jamais seule.
