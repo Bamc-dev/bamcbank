@@ -69,4 +69,15 @@ class AmountTest {
         assertThatThrownBy(() -> Amount.of("10.005"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    // --- Comparison ---
+    @Test
+    void anAmountIsGreaterThanAnotherIfItsValueIsGreater() {
+        assertThat(Amount.of("10.01").compareTo(Amount.of("10.00")) > 0);
+    }
+
+    @Test
+    void anAmountIsLessThanAnotherIfItsValueIsLess() {
+        assertThat(Amount.of("10.00").compareTo(Amount.of("10.01")) < 0);
+    }
 }

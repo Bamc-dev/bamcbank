@@ -37,4 +37,8 @@ public record Amount(BigDecimal value) {
     public String toString() {
         return this.value.toPlainString();
     }
+
+    public int compareTo(Amount other) {
+        return this.value.compareTo(other.value);
+    }
 }
