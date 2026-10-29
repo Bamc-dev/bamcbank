@@ -71,13 +71,21 @@ class AmountTest {
     }
 
     // --- Comparison ---
+
     @Test
-    void anAmountIsGreaterThanAnotherIfItsValueIsGreater() {
-        assertThat(Amount.of("10.01").compareTo(Amount.of("10.00")) > 0);
+    void anAmountIsGreaterThanOtherWithMethodIsGreaterThan() {
+        assertThat(Amount.of("10.01").isGreaterThan(Amount.of("10.00"))).isTrue();
     }
 
     @Test
-    void anAmountIsLessThanAnotherIfItsValueIsLess() {
-        assertThat(Amount.of("10.00").compareTo(Amount.of("10.01")) < 0);
+    void anAmountIsLessThanOtherWithMethodIsLessThan() {
+        assertThat(Amount.of("10.00").isLessThan(Amount.of("10.01"))).isTrue();
+    }
+
+    @Test
+    void anAmountIsNotGreaterThanAnEqualAmount() {
+        // Boundary used by Account.reserve: reserving exactly the available balance
+        // must be allowed
+        assertThat(Amount.of("10.00").isGreaterThan(Amount.of("10.00"))).isFalse();
     }
 }
