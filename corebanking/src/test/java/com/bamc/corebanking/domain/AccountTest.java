@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import com.bamc.corebanking.domain.exception.DomainException;
 import com.bamc.corebanking.domain.exception.InsufficientFundsException;
+import com.bamc.corebanking.domain.exception.ReservationNotFoundException;
 
 class AccountTest {
 
@@ -50,6 +51,31 @@ class AccountTest {
 
         assertThat(account.balance()).isEqualTo(Amount.of("300.00"));
         assertThat(account.availableBalance()).isEqualTo(Amount.of("50.00"));
+    }
+
+    // --- Settlement ---
+
+    @Test
+    void settlingAPresentReservationRemovesItAndDecreasesTheBalance() {
+        Account account = Account.open(Amount.of("300.00"));
+        account.reserve(Amount.of("250.00"));
+
+        account.settleReservation(Amount.of("250.00"));
+
+        // the hold is gone, so the available balance equals the new balance
+        assertThat(account.balance()).isEqualTo(Amount.of("50.00"));
+        assertThat(account.availableBalance()).isEqualTo(Amount.of("50.00"));
+    }
+
+    @Test
+    void settlingAnAbsentReservationIsRefusedAndChangesNothing() {
+        Account account = Account.open(Amount.of("300.00"));
+
+        assertThatThrownBy(() -> account.settleReservation(Amount.of("250.00")))
+                .isInstanceOf(ReservationNotFoundException.class);
+
+        assertThat(account.balance()).isEqualTo(Amount.of("300.00"));
+        assertThat(account.availableBalance()).isEqualTo(Amount.of("300.00"));
     }
 
     // --- Insufficient funds ---
@@ -102,4 +128,6 @@ class AccountTest {
                 .hasMessageContaining("20.00")
                 .hasMessageContaining("10.00");
     }
+
+
 }
