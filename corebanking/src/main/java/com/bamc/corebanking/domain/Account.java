@@ -1,6 +1,8 @@
 package com.bamc.corebanking.domain;
 
 import com.bamc.corebanking.domain.exception.InsufficientFundsException;
+import com.bamc.corebanking.domain.exception.ReservationNotFoundException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -31,6 +33,19 @@ public class Account {
             throw new InsufficientFundsException(amount, this.availableBalance());
         }
         this.reservations.add(amount);
+    }
+
+    public void settleReservation(Amount amount) {
+        if (this.reservations.remove(amount)) {
+            this.balance = this.balance.subtract(amount);
+        }
+        else {
+            throw new ReservationNotFoundException();
+        }
+    }
+
+    public void credit(Amount amount) {
+        this.balance = this.balance.add(amount);
     }
 
 }
