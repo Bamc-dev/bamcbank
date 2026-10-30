@@ -30,7 +30,4 @@ public class Transfer {
         return amount;
     }
 
-    public Account sender() {
-        return sender;
-    }
 }
