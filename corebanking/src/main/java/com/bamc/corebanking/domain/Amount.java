@@ -33,8 +33,17 @@ public record Amount(BigDecimal value) {
         return new Amount(this.value.subtract(other.value));
     }
 
+    public boolean isGreaterThan(Amount of) {
+        return this.value.compareTo(of.value) > 0;
+    }
+
+    public boolean isLessThan(Amount of) {
+        return this.value.compareTo(of.value) < 0;
+    }
+
     @Override
     public String toString() {
         return this.value.toPlainString();
     }
+
 }

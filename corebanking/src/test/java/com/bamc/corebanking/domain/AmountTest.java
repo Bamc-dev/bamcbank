@@ -69,4 +69,23 @@ class AmountTest {
         assertThatThrownBy(() -> Amount.of("10.005"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    // --- Comparison ---
+
+    @Test
+    void anAmountIsGreaterThanOtherWithMethodIsGreaterThan() {
+        assertThat(Amount.of("10.01").isGreaterThan(Amount.of("10.00"))).isTrue();
+    }
+
+    @Test
+    void anAmountIsLessThanOtherWithMethodIsLessThan() {
+        assertThat(Amount.of("10.00").isLessThan(Amount.of("10.01"))).isTrue();
+    }
+
+    @Test
+    void anAmountIsNotGreaterThanAnEqualAmount() {
+        // Boundary used by Account.reserve: reserving exactly the available balance
+        // must be allowed
+        assertThat(Amount.of("10.00").isGreaterThan(Amount.of("10.00"))).isFalse();
+    }
 }
