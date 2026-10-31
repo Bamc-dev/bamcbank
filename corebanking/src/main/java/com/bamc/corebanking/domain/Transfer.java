@@ -2,7 +2,9 @@ package com.bamc.corebanking.domain;
 
 import com.bamc.corebanking.domain.enums.TransferState;
 import com.bamc.corebanking.domain.events.TransferExecuted;
+import com.bamc.corebanking.domain.events.TransferRejected;
 import com.bamc.corebanking.domain.exception.TransferNotExecutableException;
+import com.bamc.corebanking.domain.exception.TransferNotRejectableException;
 
 public class Transfer {
 
@@ -39,6 +41,15 @@ public class Transfer {
         receiver.credit(amount);
         this.state = TransferState.EXECUTED;
         return new TransferExecuted(amount);
+    }
+
+    public TransferRejected reject() {
+        if (state != TransferState.PENDING_FRAUD_CHECK) {
+            throw new TransferNotRejectableException();
+        }
+        sender.releaseReservation(amount);
+        this.state = TransferState.REJECTED_FRAUD;
+        return new TransferRejected(amount);
     }
 
 }
