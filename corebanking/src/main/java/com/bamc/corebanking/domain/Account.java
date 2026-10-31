@@ -44,6 +44,12 @@ public class Account {
         }
     }
 
+    public void releaseReservation(Amount amount) {
+        if (!this.reservations.remove(amount)) {
+            throw new ReservationNotFoundException();
+        }
+    }
+
     public void credit(Amount amount) {
         this.balance = this.balance.add(amount);
     }
