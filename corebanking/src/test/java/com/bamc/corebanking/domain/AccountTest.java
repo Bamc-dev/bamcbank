@@ -78,6 +78,19 @@ class AccountTest {
         assertThat(account.availableBalance()).isEqualTo(Amount.of("300.00"));
     }
 
+    // --- Release ---
+
+    @Test
+    void releasingAPresentReservationRestoresTheAvailableBalanceAndKeepsTheBalance() {
+        Account account = Account.open(Amount.of("300.00"));
+        account.reserve(Amount.of("250.00"));
+
+        account.releaseReservation(Amount.of("250.00"));
+
+        assertThat(account.balance()).isEqualTo(Amount.of("300.00"));
+        assertThat(account.availableBalance()).isEqualTo(Amount.of("300.00"));
+    }
+
     // --- Insufficient funds ---
 
     @Test
